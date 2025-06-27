@@ -1,0 +1,24 @@
+import nltk
+from nltk.tree import Tree
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt_tab')
+sentence = "Natural Language Processing helps computers understand human language."
+tokens = nltk.word_tokenize(sentence)
+tree = Tree.fromstring("""
+(S
+  (NP
+    (NNP Natural)
+    (NNP Language)
+    (NNP Processing))
+  (VP
+    (VBZ helps)
+    (NP (NNS computers))
+    (VP
+      (VB understand)
+      (NP
+        (JJ human)
+        (NN language))))
+  (. .))
+""")
+tree.pretty_print()
