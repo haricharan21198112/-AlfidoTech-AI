@@ -1,0 +1,18 @@
+
+import pandas as pd
+df = pd.read_csv("Mall_Customers.csv")
+print(df.head())
+print(df.info())
+print(df.isnull().sum())
+df.fillna(df.mean(numeric_only=True), inplace=True)
+df.fillna("Unknown", inplace=True)
+for col in df.select_dtypes(include=["object"]).columns:
+    df[col] = df[col].astype('category').cat.codes
+for col in df.select_dtypes(include=["int64", "float64"]).columns:
+    df[col] = (df[col] - df[col].min()) / (df[col].max() - df[col].min())
+# Step 7: Split features and target (optional, if needed for training)
+# Replace 'target' with the name of your output column
+# features = df.drop("target", axis=1)
+# target = df["target"]
+print("Prepared Data:")
+print(df.head())
